@@ -1,7 +1,7 @@
-USERNAME="Opabinia9"
+USERNAME="anthonywu26"
 REPONAME="C30-sandbox-setup-script"
-USEREMAIL="sebastionprice@gmail.com"
-NAME="sebastion"
+USEREMAIL="anthonywu26@gmail.com"
+NAME="Anthony"
 REPOS=("git-intro" "holbertonschool-shell" "holbertonschool-low_level_programming")
 
 echo "hello geting bashrc";
