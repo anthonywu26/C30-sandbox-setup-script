@@ -1,8 +1,8 @@
 
 # usefull links for customizing your bash
 
-souring command:
-`source <(wget -qO- URL)`
+sourcing command:
+`source <(wget -qO - "https://raw.githubusercontent.com/anthonywu26/C30-sandbox-setup-script/refs/heads/config/install.sh")`
 
 ## for anis colors
 https://ansi-generator.pages.dev/   
