@@ -1,7 +1,7 @@
-USERNAME="Opabinia9"
+USERNAME="anthonywu26"
 REPONAME="C30-sandbox-setup-script"
-USEREMAIL="sebastionprice@gmail.com"
-NAME="sebastion"
+USEREMAIL="anthonywu26@gmail.com"
+NAME="Anthony"
 
 echo "hello geting bashrc";
 if [[ -f ~/.bashrc ]]; then
