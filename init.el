@@ -30,13 +30,15 @@
 (global-whitespace-mode t)
 (setq require-final-newline t)
 (setq sentence-end-double-space nil)
-(setq c-default-style "bsd"
-      c-basic-offset 4
-      tab-width 4)
-(setq-default indent-tabs-mode t)
+(setq-default c-default-style "bsd"
+              c-basic-offset 8
+              tab-width 8
+              indent-tabs-mode t)
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (setq indent-tabs-mode t)))
+            (setq-local c-basic-offset 8
+                        tab-width 8
+                        indent-tabs-mode t)))
 
 ;; View undo history
 ;; (use-package vundo
