@@ -19,6 +19,7 @@ echo "hello geting emacs config";
 if [[ -f ~/.emacs.d/init.el ]]; then
   mv ~/.emacs.d/init.el ~/.emacs.d/init.el.bak;
 fi
+mkdir ~/.emacs.d
 wget -qO ~/.emacs.d/init.el "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/init.el"
 
 git config --global user.email "$USEREMAIL";
