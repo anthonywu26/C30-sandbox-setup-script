@@ -7,13 +7,19 @@ echo "hello geting bashrc";
 if [[ -f ~/.bashrc ]]; then
   mv ~/.bashrc ~/.bashrc.bak;
 fi
-wget -qO ~/.bashrc "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/main/.bashrc"
+wget -qO ~/.bashrc "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/.bashrc"
 
 echo "hello geting bash_aliases";
 if [[ -f ~/.bash_aliases ]]; then
   mv ~/.bash_aliases ~/.bash_aliases.bak;
 fi
-wget -qO ~/.bash_aliases "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/main/.bash_aliases"
+wget -qO ~/.bash_aliases "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/.bash_aliases"
+
+echo "hello geting emacs config";
+if [[ -f ~/.emacs.d/init.el ]]; then
+  mv ~/.emacs.d/init.el ~/.emacs.d/init.el.bak;
+fi
+wget -qO ~/.emacs.d/init.el "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/init.el"
 
 git config --global user.email "$USEREMAIL";
 git config --global user.name "$NAME";
