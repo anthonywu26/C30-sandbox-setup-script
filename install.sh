@@ -65,22 +65,51 @@ else
     echo "Error: wget failed with status: $RESPONSE_STATUS"
 fi
 
+git clone https://github.com/hs-hq/Betty.git $HOME/betty
+cd $HOME/betty
+sudo ./install.sh
+
+cat <<'EOF' >betty
+#!/bin/bash
+# Simply a wrapper script to keep you from having to use betty-style
+# and betty-doc separately on every item.
+# Originally by Tim Britton (@wintermanc3r), multiargument added by
+# Larry Madeo (@hillmonkey)
+
+BIN_PATH="/usr/local/bin"
+BETTY_STYLE="betty-style"
+BETTY_DOC="betty-doc"
+
+if [ "$#" = "0" ]; then
+    echo "No arguments passed."
+    exit 1
+fi
+
+for argument in "$@" ; do
+    echo -e "\n========== $argument =========="
+    ${BIN_PATH}/${BETTY_STYLE} "$argument"
+    ${BIN_PATH}/${BETTY_DOC} "$argument"
+done
+EOF
+chmod a+x betty
+sudo mv betty /bin/
+
 rmdf()
 {
-		DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
-		echo "Would you like to remove the defualt folders and files from the holberton sandbox";
-		echo "${DF[*]}";
-		read -p $'y/n: ' -r remove;
-		if [[ "$remove" == "y" ]];then
-			echo "removing defualts!";
-			for d in "${DF[@]}"; do
-				if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
-					rm -r "$d";
-				fi;
-			done		
-		else
-			echo "righty-o, not removing";
-		fi
+	DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
+	# echo "Would you like to remove the defualt folders and files from the holberton sandbox";
+	# echo "${DF[*]}";
+	# read -p $'y/n: ' -r remove;
+	# if [[ "$remove" == "y" ]];then
+	echo "removing defualts!";
+	for d in "${DF[@]}"; do
+		if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
+			rm -r "$d";
+		fi;
+	done		
+	# else
+	# 	echo "righty-o, not removing";
+	# fi
 }
 
 rmdf
