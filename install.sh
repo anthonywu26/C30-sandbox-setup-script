@@ -94,6 +94,7 @@ EOF
 chmod a+x betty
 sudo mv betty /bin/
 
+cd $HOME
 rmdf()
 {
 	DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
