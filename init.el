@@ -20,21 +20,20 @@
 ;; GUI
 ;; Tweaks
 (setq inhibit-startup-screen t)
-(column-number-mode)
+(setq column-number-mode t)
 ;; Line numbers
 (dolist (hook '(prog-mode-hook conf-mode-hook text-mode-hook))
   (add-hook hook 'display-line-numbers-mode))
 ;; Text highlights
-(setq show-paren-delay 0)
-(show-paren-mode)
-(dolist (hook '(conf-mode-hook prog-mode-hook text-mode-hook))
-  (add-hook hook (lambda () (setq show-trailing-whitespace t))))
-(setq-default indicate-empty-lines t)
-(setq-default indicate-buffer-boundaries 'left)
+(require 'whitespace)
+(setq whitespace-style '(face empty lines-tail trailing))
+(global-whitespace-mode t)
 (setq require-final-newline t)
 (setq sentence-end-double-space nil)
-(setq-default indent-tabs-mode t)
-(setq-default tab-width 4)
+(setq c-default-style "bsd"
+      c-basic-offset 4
+      tab-width 4
+      indent-tabs-mode t)
 
 ;; View undo history
 ;; (use-package vundo
