@@ -19,26 +19,26 @@ fi
 
 # Configure bash.
 echo "hello geting bashrc";
-if [[ -f ~/.bashrc ]]; then
-    mv ~/.bashrc ~/.bashrc.bak;
+if [[ -f $HOME/.bashrc ]]; then
+    mv $HOME/.bashrc $HOME/.bashrc.bak;
 fi
-wget -qO ~/.bashrc "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bashrc"
+wget -qO $HOME/.bashrc "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bashrc"
 
 echo "hello geting bash_aliases";
-if [[ -f ~/.bash_aliases ]]; then
-    mv ~/.bash_aliases ~/.bash_aliases.bak;
+if [[ -f $HOME/.bash_aliases ]]; then
+    mv $HOME/.bash_aliases $HOME/.bash_aliases.bak;
 fi
-wget -qO ~/.bash_aliases "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bash_aliases"
+wget -qO $HOME/.bash_aliases "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bash_aliases"
 
-source ~/.bashrc
+source $HOME/.bashrc
 
 # Configure emacs.
 echo "hello geting emacs config";
-if [[ -f ~/.emacs.d/init.el ]]; then
-    mv ~/.emacs.d/init.el ~/.emacs.d/init.el.bak;
+if [[ -f $HOME/.emacs.d/init.el ]]; then
+    mv $HOME/.emacs.d/init.el $HOME/.emacs.d/init.el.bak;
 fi
-mkdir ~/.emacs.d
-wget -qO ~/.emacs.d/init.el "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/init.el"
+mkdir $HOME/.emacs.d
+wget -qO $HOME/.emacs.d/init.el "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/init.el"
 
 # Configure git.
 git config --global user.email "$USEREMAIL";
@@ -94,9 +94,7 @@ fi
 
 # Setup betty linter.
 git clone https://github.com/hs-hq/Betty.git $HOME/betty
-cd $HOME/betty
-sudo ./install.sh > /dev/null
-cd $HOME
+sudo $HOME/betty/install.sh > /dev/null
 
 # Add betty linter command to $PATH
 cat <<'EOF' >betty
@@ -121,14 +119,14 @@ for argument in "$@" ; do
     ${BIN_PATH}/${BETTY_DOC} "$argument"
 done
 EOF
-chmod a+x betty
-sudo mv betty /bin/
+chmod a+x $HOME/betty/betty
+sudo mv $HOME/betty/betty /bin/
 
 # Remove default directories and files.
 DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
 echo "removing defualts!";
 for d in "${DF[@]}"; do
     if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
-        rm -r "$d";
+        rm -r "$HOME/$d";
     fi;
 done
