@@ -1,31 +1,51 @@
-USERNAME="anthonywu26"
-REPONAME="C30-sandbox-setup-script"
-USEREMAIL="anthonywu26@gmail.com"
-NAME="Anthony"
+# Set variables if not passed.
+if [[ -n "$1" ]]; then
+    INSTALLER_LINK="$1"
+else
+    read -rp "Enter installer link: " INSTALLER_LINK
+fi
 
+if [[ -n "$2" ]]; then
+    USEREMAIL="$2"
+else
+    read -rp "Enter user email: " USEREMAIL
+fi
+
+if [[ -n "$3" ]]; then
+    NAME="$3"
+else
+    read -rp "Enter user name: " NAME
+fi
+
+# Configure bash.
 echo "hello geting bashrc";
 if [[ -f ~/.bashrc ]]; then
-  mv ~/.bashrc ~/.bashrc.bak;
+    mv ~/.bashrc ~/.bashrc.bak;
 fi
-wget -qO ~/.bashrc "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/.bashrc"
+wget -qO ~/.bashrc "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bashrc"
 
 echo "hello geting bash_aliases";
 if [[ -f ~/.bash_aliases ]]; then
-  mv ~/.bash_aliases ~/.bash_aliases.bak;
+    mv ~/.bash_aliases ~/.bash_aliases.bak;
 fi
-wget -qO ~/.bash_aliases "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/.bash_aliases"
+wget -qO ~/.bash_aliases "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/.bash_aliases"
 
+source ~/.bashrc
+
+# Configure emacs.
 echo "hello geting emacs config";
 if [[ -f ~/.emacs.d/init.el ]]; then
-  mv ~/.emacs.d/init.el ~/.emacs.d/init.el.bak;
+    mv ~/.emacs.d/init.el ~/.emacs.d/init.el.bak;
 fi
 mkdir ~/.emacs.d
-wget -qO ~/.emacs.d/init.el "https://raw.githubusercontent.com/${USERNAME}/${REPONAME}/refs/heads/dev/init.el"
+wget -qO ~/.emacs.d/init.el "https://raw.githubusercontent.com/${INSTALLER_LINK}/config/init.el"
 
+# Configure git.
 git config --global user.email "$USEREMAIL";
 git config --global user.name "$NAME";
 git config --global credential.helper 'cache --timeout=7200';
 
+# Clone git repos.
 echo "hello getting repository list";
 RESPONSE_RAW=$(curl -s -w "\n%{http_code}" \
     -H "Accept: application/vnd.github+json" \
@@ -72,10 +92,13 @@ else
     echo "Error: wget failed with status: $RESPONSE_STATUS"
 fi
 
+# Setup betty linter.
 git clone https://github.com/hs-hq/Betty.git $HOME/betty
 cd $HOME/betty
-sudo ./install.sh
+sudo ./install.sh > /dev/null
+cd $HOME
 
+# Add betty linter command to $PATH
 cat <<'EOF' >betty
 #!/bin/bash
 # Simply a wrapper script to keep you from having to use betty-style
@@ -101,24 +124,11 @@ EOF
 chmod a+x betty
 sudo mv betty /bin/
 
-cd $HOME
-rmdf()
-{
-	DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
-	# echo "Would you like to remove the defualt folders and files from the holberton sandbox";
-	# echo "${DF[*]}";
-	# read -p $'y/n: ' -r remove;
-	# if [[ "$remove" == "y" ]];then
-	echo "removing defualts!";
-	for d in "${DF[@]}"; do
-		if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
-			rm -r "$d";
-		fi;
-	done		
-	# else
-	# 	echo "righty-o, not removing";
-	# fi
-}
-
-rmdf
-source ~/.bashrc
+# Remove default directories and files.
+DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
+echo "removing defualts!";
+for d in "${DF[@]}"; do
+    if [[ -d "$HOME/$d" || -f "$HOME/$d" ]]; then
+        rm -r "$d";
+    fi;
+done

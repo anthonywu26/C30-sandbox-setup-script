@@ -2,7 +2,7 @@
 # usefull links for customizing your bash
 
 sourcing command:
-`source <(wget -qO - "https://raw.githubusercontent.com/anthonywu26/C30-sandbox-setup-script/refs/heads/config/install.sh")`
+`source <(wget -qO - "https://raw.githubusercontent.com/anthonywu26/C30-sandbox-setup-script/refs/heads/dev/install.sh") "anthonywu26/C30-sandbox-setup-script/refs/heads/dev" "anthonywu26@gmail.com" "Anthony"`
 
 ## for anis colors
 https://ansi-generator.pages.dev/   

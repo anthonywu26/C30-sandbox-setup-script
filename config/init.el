@@ -40,9 +40,13 @@
                         tab-width 8
                         indent-tabs-mode t)))
 
+;; Copy Paste Keybinds
+(cua-mode t)
+
 ;; View undo history
-;; (use-package vundo
-;;  :bind ("C-x u" . vundo))
+(use-package vundo
+  :ensure t
+  :bind ("C-x u" . vundo))
 
 ;; Startup command
 (dired (expand-file-name "."))
