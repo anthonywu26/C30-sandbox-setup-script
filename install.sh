@@ -94,6 +94,7 @@ fi
 
 # Setup betty linter.
 git clone https://github.com/hs-hq/Betty.git $HOME/betty
+cd $HOME/betty
 sudo $HOME/betty/install.sh > /dev/null
 
 # Add betty linter command to $PATH
@@ -121,6 +122,7 @@ done
 EOF
 chmod a+x $HOME/betty/betty
 sudo mv $HOME/betty/betty /bin/
+cd $HOME
 
 # Remove default directories and files.
 DF=("empty_directory" "my_school" "not_here" "old_school" "ready_to_be_removed" "school");
