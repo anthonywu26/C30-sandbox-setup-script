@@ -43,10 +43,5 @@
 ;; Copy Paste Keybinds
 (cua-mode t)
 
-;; View undo history
-(use-package vundo
-  :ensure t
-  :bind ("C-x u" . vundo))
-
 ;; Startup command
 (dired (expand-file-name "."))
